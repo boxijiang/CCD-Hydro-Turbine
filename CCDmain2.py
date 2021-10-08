@@ -38,13 +38,22 @@ phase.add_control(name='u', units=None, lower=0, upper=80000, continuity=True,
                   rate_continuity=True, targets='u', ref=1e5)
 
 # NREL Initial
+ # CCD
+phase.add_parameter('theta', targets=['torque_comp.theta'], static_target=True, units=None,
+                    val=np.array([13.308, 10.162, 7.795, 5.361, 3.125, 1.526, 0.106]),
+                    opt=True, lower=np.zeros(7), upper=30 * np.ones(7))
+phase.add_parameter('chord', targets=['torque_comp.chord'], static_target=True, units=None,
+                    val=np.array([0.4557, 0.4458, 0.4007, 0.3502, 0.301, 0.2518, 0.1419]),
+                    opt=True, lower=np.zeros(7), upper=np.ones(7))
 
+''' # Optimal Control
 phase.add_parameter('theta', targets=['torque_comp.theta'], static_target=True, units=None,
                     val=np.array([13.308, 10.162, 7.795, 5.361, 3.125, 1.526, 0.106]),
                     opt=False)
 phase.add_parameter('chord', targets=['torque_comp.chord'], static_target=True, units=None,
                     val=np.array([0.4557, 0.4458, 0.4007, 0.3502, 0.301, 0.2518, 0.1419]),
                     opt=False)
+'''
 
 phase.add_parameter('mass', targets=['ode_comp.mass'], static_target=True, units=None,
                     val=2234, opt=False)
