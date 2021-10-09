@@ -6,7 +6,7 @@ from CCDode2 import TurbineODE
 import matplotlib.pyplot as plt
 import time
 
-outputDir = "YL_scaled2"
+outputDir = "Users/boxij/OneDrive/Desktop/RAFTBEM/SNOPTDre/OPTChydro"
 
 if not os.path.exists(os.path.join(os.getcwd(),outputDir)):
     os.mkdir(outputDir)
@@ -122,7 +122,7 @@ plt.plot(r, twist_final, color=cmap(3), marker="o", label='final')
 plt.legend(loc='upper right')
 plt.xlabel('Position along radius (m)')
 plt.ylabel('Twist angle along radius')
-plt.savefig('output/TWISTRAMPCCD.png')
+plt.savefig(os.path.join(outputDir,'TWISTRAMPCCD.png'))
 
 fig = plt.figure()
 cmap = plt.get_cmap("tab10")
@@ -131,7 +131,7 @@ plt.plot(r, chord_final, color=cmap(3), marker="o", label='final')
 plt.legend(loc='upper right')
 plt.xlabel('Position along radius (m)')
 plt.ylabel('Chord length along radius')
-plt.savefig('output/CHORDRAMPCCD.png')
+plt.savefig(os.path.join(outputDir,'CHORDRAMPCCD.png'))
 
 fig = plt.figure()
 cmap = plt.get_cmap("tab10")
@@ -139,7 +139,7 @@ cmap = plt.get_cmap("tab10")
 plt.plot(TTT, JJJ, color=cmap(1), marker="o")
 plt.xlabel('Time (s)')
 plt.ylabel('Output Energy')
-plt.savefig('output/OutputEnergyRAMPCCD.png')
+plt.savefig(os.path.join(outputDir,'OutputEnergyRAMPCCD.png'))
 
 fig2 = plt.figure()
 cmap = plt.get_cmap("tab10")
@@ -147,7 +147,7 @@ cmap = plt.get_cmap("tab10")
 plt.plot(TTT, XXX, color=cmap(1), marker="o")
 plt.xlabel('Time (s)')
 plt.ylabel('Turbine rotating speed (rad/s)')
-plt.savefig('output/TURBINESPEEDRAMPCCD.png')
+plt.savefig(os.path.join(outputDir,'TURBINESPEEDRAMPCCD.png'))
 
 plt.figure()
 cmap = plt.get_cmap("tab10")
@@ -155,7 +155,7 @@ cmap = plt.get_cmap("tab10")
 plt.plot(TTT, UUU, color=cmap(1), marker="o")
 plt.xlabel('Time (s)')
 plt.ylabel('Control Force')
-plt.savefig('output/CONTROLLOADRAMPCCD.png')
+plt.savefig(os.path.join(outputDir,'CONTROLLOADRAMPCCD.png'))
 
 sim_out = traj.simulate()
 JJ = sim_out.get_val('traj.phase0.timeseries.states:J')
@@ -268,7 +268,7 @@ plt.plot(TT, JJ, color=cmap(0), marker="o")
 plt.plot(TTT, JJJ, color=cmap(1), marker="o")
 plt.xlabel('Time (s)')
 plt.ylabel('Output Energy')
-plt.savefig('output/OutputEnergyRAMPCCD2.png')
+plt.savefig(os.path.join(outputDir,'OutputEnergyRAMPCCD2.png'))
 
 fig2 = plt.figure()
 cmap = plt.get_cmap("tab10")
@@ -276,7 +276,7 @@ plt.plot(TT, XX, color=cmap(0), marker="o")
 plt.plot(TTT, XXX, color=cmap(1), marker="o")
 plt.xlabel('Time (s)')
 plt.ylabel('Turbine rotating speed (rad/s)')
-plt.savefig('output/TURBINESPEEDRAMPCCD2.png')
+plt.savefig(os.path.join(outputDir,'TURBINESPEEDRAMPCCD2.png'))
 
 plt.figure()
 cmap = plt.get_cmap("tab10")
@@ -284,5 +284,5 @@ plt.plot(TT, UU, color=cmap(0), marker="o")
 plt.plot(TTT, UUU, color=cmap(1), marker="o")
 plt.xlabel('Time (s)')
 plt.ylabel('Control Force')
-plt.savefig('output/CONTROLLOADRAMPCCD2.png')
+plt.savefig(os.path.join(outputDir,'CONTROLLOADRAMPCCD2.png'))
 
