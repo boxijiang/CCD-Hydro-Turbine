@@ -1,7 +1,7 @@
 import os
 
-basepath = os.path.join(os.path.expanduser('~'), 'OneDrive', 'Desktop', 'RAFTBEM', 'SNOPTDre', '5MW_AFFiles')
-os.chdir(basepath)
+# basepath = os.path.join(os.path.expanduser('~'), 'OneDrive', 'Desktop', 'RAFTBEM', 'SNOPTDre', '5MW_AFFiles')
+# os.chdir(basepath)
 # C:\Users\boxij\OneDrive\Desktop\RAFTBEM\SNOPTDre\5MW_AFFiles000
 
 import openmdao.api as om
@@ -67,14 +67,14 @@ class Computation(om.ExplicitComponent):
 
         # load all airfoils
         airfoil_types = [0] * 8
-        airfoil_types[0] = afinit('Cylinder1.dat')
-        airfoil_types[1] = afinit('Cylinder2.dat')
-        airfoil_types[2] = afinit('DU40_A17.dat')
-        airfoil_types[3] = afinit('DU35_A17.dat')
-        airfoil_types[4] = afinit('DU30_A17.dat')
-        airfoil_types[5] = afinit('DU25_A17.dat')
-        airfoil_types[6] = afinit('DU21_A17.dat')
-        airfoil_types[7] = afinit('NACA64_A17.dat')
+        airfoil_types[0] = afinit('5MW_AFFiles/Cylinder1.dat')
+        airfoil_types[1] = afinit('5MW_AFFiles/Cylinder2.dat')
+        airfoil_types[2] = afinit('5MW_AFFiles/DU40_A17.dat')
+        airfoil_types[3] = afinit('5MW_AFFiles/DU35_A17.dat')
+        airfoil_types[4] = afinit('5MW_AFFiles/DU30_A17.dat')
+        airfoil_types[5] = afinit('5MW_AFFiles/DU25_A17.dat')
+        airfoil_types[6] = afinit('5MW_AFFiles/DU21_A17.dat')
+        airfoil_types[7] = afinit('5MW_AFFiles/NACA64_A17.dat')
 
         # place at appropriate radial stations
         # af_idx = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 6, 7, 7, 7, 7, 7, 7] for Nrel

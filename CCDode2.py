@@ -1,8 +1,8 @@
 
 import os
 
-basepath = os.path.join(os.path.expanduser('~'), 'OneDrive', 'Desktop', 'RAFTBEM', 'SNOPTDre', '5MW_AFFiles')
-os.chdir(basepath)
+# basepath = os.path.join(os.path.expanduser('~'), 'OneDrive', 'Desktop', 'RAFTBEM', 'SNOPTDre', '5MW_AFFiles')
+# os.chdir(basepath)
 # C:\Users\boxij\OneDrive\Desktop\RAFTBEM\dymosCCBlade\5MW_AFFiles000
 import openmdao.api as om
 import numpy as np
@@ -34,7 +34,13 @@ class Turbine(om.ExplicitComponent):
         # Complex-step derivatives
         # self.declare_coloring(wrt='*', method='cs', show_sparsity=True)
 
-        self.declare_partials(of='*', wrt='*', method='fd')
+        # Declare partials
+        arange = np.arange(nn)
+
+        self.declare_partials(of='xdot', wrt='torque', rows=arange, cols=arange)
+        self.declare_partials(of="xdot", wrt="u", rows=arange, cols=arange)
+        self.declare_partials(of="Jdot", wrt="x", rows=arange, cols=arange)
+        self.declare_partials(of="Jdot", wrt="torque", rows=arange, cols=arange)
     def compute(self, inputs, outputs):
 
         x = inputs['x']
@@ -47,7 +53,17 @@ class Turbine(om.ExplicitComponent):
         outputs['Jdot'] = torque * x
         Answer = torque * x
 
+    def compute_partials(self, inputs, partials):
 
+        x = inputs["x"]
+        u = inputs["u"]
+        m = inputs['mass']
+        torque = inputs["torque"]
+        partials["xdot","torque"] = 1.0/m
+        partials["xdot", "u"] = -1.0/m
+
+        partials["Jdot", "x"] = torque
+        partials["Jdot", "torque"] = x
 
 
 class TurbineODE(om.Group):
